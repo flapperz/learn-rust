@@ -23,9 +23,16 @@ fn main() {
             .read_line(&mut guess)
             .expect("Failed to read line");
 
-        let guess: u32 = match guess.trim().parse() {
+        let guess = guess.trim();
+        if guess == "/exit" {
+            println!("Exiting...");
+            return;
+        }
+
+        let guess: u32 = match guess.parse() {
             Ok(num) => num,
             Err(_) => {
+                println!("Please type a number or '/exit' to quit.");
                 continue;
             }
         };
